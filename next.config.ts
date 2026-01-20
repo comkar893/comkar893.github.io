@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   output: "export",
-  assetPrefix: "/comkar893.github.io",
+  assetPrefix: "/",
   trailingSlash: true,
   typescript: {
     ignoreBuildErrors: true,
