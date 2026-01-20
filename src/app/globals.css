@@ -1,0 +1,132 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+    scroll-behavior: smooth;
+  }
+  :root {
+    /* Light theme (kept for structure, but dark theme is primary) */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 352 94% 71%; /* Soft Coral Red */
+    --primary-foreground: 352 90% 15%; /* Dark desaturated coral for text */
+    --secondary: 30 90% 80%; /* Lighter Peach/Apricot */
+    --secondary-foreground: 30 30% 25%; /* Dark text for lighter secondary */
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 30 100% 58%; /* Vibrant Orange */
+    --accent-foreground: 30 100% 10%; /* Dark text for Orange accent */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 352 94% 71%; /* Matches new Primary (Soft Coral Red) */
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222 39% 11%; /* Soft Charcoal #111827 */
+    --foreground: 210 17% 95%; /* Off-White #F3F4F6 */
+
+    --card: 215 28% 17%; /* Slightly Lighter Charcoal #1F2937 */
+    --card-foreground: 210 17% 95%; /* Off-White */
+
+    --popover: 222 39% 9%; /* Darker than background for popovers */
+    --popover-foreground: 210 17% 95%;
+
+    --primary: 352 94% 71%; /* Soft Coral Red #FB7185 */
+    --primary-foreground: 352 90% 15%; /* Dark desaturated coral for text */
+
+    --secondary: 30 90% 80%; /* Lighter Peach/Apricot */
+    --secondary-foreground: 30 30% 25%; /* Dark text for lighter secondary */
+
+    --muted: 215 28% 25%; /* Slightly lighter than card */
+    --muted-foreground: 210 14% 80%; /* Light Gray #D1D5DB inspired */
+
+    --accent: 30 100% 58%; /* Vibrant Orange */
+    --accent-foreground: 30 100% 10%; /* Dark text for Orange accent */
+
+    --destructive: 0 70% 55%; /* Standard Destructive Red */
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 215 28% 22%; /* Subtle border */
+    --input: 215 28% 20%; /* Dark input background */
+    --ring: 352 94% 71%; /* Matches new Primary (Soft Coral Red) */
+    
+    --chart-1: 352 94% 71%; /* Primary Coral Red */
+    --chart-2: 30 90% 80%;  /* Secondary Lighter Peach/Apricot */
+    --chart-3: 30 100% 58%;   /* Accent Orange */
+    --chart-4: 352 80% 60%; /* Darker Coral */
+    --chart-5: 25 80% 70%;  /* Lighter/Desaturated Peach for contrast */
+
+    --sidebar-background: 215 28% 17%; /* Same as card */
+    --sidebar-foreground: 210 17% 95%; /* Main foreground */
+    --sidebar-primary: 352 94% 71%; /* Main primary (Coral Red) */
+    --sidebar-primary-foreground: 352 90% 15%; /* Dark desaturated coral text */
+    --sidebar-accent: 30 90% 80%; /* Main accent (Lighter Peach/Apricot) */
+    --sidebar-accent-foreground: 30 30% 25%; /* Dark text on Peach */
+    --sidebar-border: 215 28% 22%; /* Main border */
+    --sidebar-ring: 352 94% 71%; /* Main ring (Primary) */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    background-color: hsl(var(--background)); /* Solid background */
+    @apply text-foreground;
+    font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif; /* Use Geist font */
+    overflow-x: hidden; /* Prevent horizontal scroll from animation */
+  }
+
+  @keyframes blink-caret-animation {
+    from, to { border-color: transparent }
+    50% { border-color: hsl(var(--accent)); } /* Uses theme's accent color */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  }
+  p, span, div, li, a, button, input, textarea, label {
+    font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  }
+}
+
+/* Custom scrollbar for a more modern feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--background) / 0.5);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
