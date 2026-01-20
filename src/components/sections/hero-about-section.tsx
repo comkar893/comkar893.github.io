@@ -41,17 +41,17 @@ const HeroAboutSection: FC = () => {
               </span>
               {bioPart2}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+            {/* <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <Button 
                 size="lg" 
                 asChild 
                 className="bg-transparent border border-primary text-primary transition-all duration-300 hover:scale-105 hover:shadow-lg hover:bg-transparent flex items-center gap-2"
               >
-                <Link href="/omkar-cv.pdf" download target="_blank"> {/* User will need to add omkar-cv.pdf to the /public folder */}
+                <Link href="/omkar-cv.pdf" download target="_blank">
                   <Download className="h-5 w-5" /> Download CV
                 </Link>
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
