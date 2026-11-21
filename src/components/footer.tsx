@@ -28,7 +28,7 @@ const Footer: FC = () => {
             </Link>
           </Button>
           <Button variant="ghost" size="icon" asChild aria-label="GitHub">
-            <Link href="https://github.com" target="_blank" rel="noopener noreferrer">
+            <Link href="https://github.com/comkar893" target="_blank" rel="noopener noreferrer">
               <Github className="h-5 w-5 text-muted-foreground hover:text-foreground transition-colors" />
             </Link>
           </Button>

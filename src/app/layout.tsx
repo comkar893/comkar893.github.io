@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Omkar's Odyssey",
+  title: "Omkar Chavan | Software Engineer",
   description: "Personal portfolio of Omkar Sandip Chavan, showcasing skills, projects, and experience in software engineering and data science.",
 };
 
