@@ -25,7 +25,7 @@ const navItems: NavItem[] = [
   { href: '/#experience', label: 'Work Experience', icon: Briefcase, id: 'experience' },
   { href: '/#skills', label: 'Skills', icon: WandSparkles, id: 'skills' },
   { href: '/#projects', label: 'Projects & Publications', icon: Lightbulb, id: 'projects' },
-  // { href: '/#contact', label: 'Contact', icon: Mail, id: 'contact' },
+  { href: '/#contact', label: 'Contact', icon: Mail, id: 'contact' },
 ];
 
 const Header: FC = () => {

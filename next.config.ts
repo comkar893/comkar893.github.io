@@ -1,10 +1,8 @@
-import type { NextConfig } from "next";
+import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  output: "export",
-  assetPrefix: "/",
-  trailingSlash: true,
+  /* Static export: GitHub Pages only serves plain files (no Node server) */
+  output: 'export',
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -12,13 +10,14 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
+    // next/image optimization needs a server; static export requires this
     unoptimized: true,
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "placehold.co",
-        port: "",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'placehold.co',
+        port: '',
+        pathname: '/**',
       },
     ],
   },

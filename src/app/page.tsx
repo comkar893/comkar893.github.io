@@ -1,6 +1,7 @@
 
 import Header from '@/components/header';
 import HeroAboutSection from '@/components/sections/hero-about-section';
+import ContactSection from '@/components/sections/contact-section';
 import Footer from '@/components/footer';
 import SectionWrapper from '@/components/section-wrapper';
 import CvItem from '@/components/cv-item';
@@ -10,7 +11,7 @@ import { educationData, experienceData, skillsData, projectData, publicationData
 import { Lightbulb, BookOpen } from 'lucide-react';
 import type { Skill } from '@/data/cv';
 
-export default function () {
+export default function HomePage() {
   const groupedSkills = skillsData.reduce((acc, skill) => {
     if (!acc[skill.category]) {
       acc[skill.category] = [];
@@ -117,6 +118,8 @@ export default function () {
             </div>
           )}
         </SectionWrapper>
+        
+        <ContactSection />
       </main>
       <Footer />
     </>

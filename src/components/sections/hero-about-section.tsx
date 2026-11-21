@@ -7,7 +7,7 @@ import type { FC } from 'react';
 
 const bioPart1 = "a Data Science graduate from Rochester Institute of Technology and currently a ";
 const highlightedDesignation = "Software Engineer II";
-const bioPart2 = " at Foundry Digital LLC. I'm passionate about building robust backend solutions, optimizing system performance, and leveraging data to drive insights. With a strong foundation in software engineering and a keen interest in cloud technologies and distributed systems, I enjoy tackling complex challenges and contributing to innovative projects. Explore my journey and connect with me to discuss technology or potential collaborations!";
+const bioPart2 = " at Foundry Digital LLC. I'm passionate about building robust backend solutions, optimizing system performance, and leveraging data to drive insights. With a strong foundation in software engineering and a keen interest in cloud technologies and distributed systems, I enjoy tackling complex challenges and contributing to innovative projects. Explore my journey and connect with me to discuss technology, data, or potential collaborations!";
 
 const HeroAboutSection: FC = () => {
   return (
@@ -18,7 +18,7 @@ const HeroAboutSection: FC = () => {
             <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden shadow-2xl border-4 border-primary transform transition-all duration-500 hover:scale-105">
               <Image
                 src="https://placehold.co/300x300.png"
-                alt="My Profile Picture"
+                alt="Omkar Chavan's Profile Picture"
                 layout="fill"
                 objectFit="cover"
                 className="rounded-full"
@@ -30,7 +30,7 @@ const HeroAboutSection: FC = () => {
           <div className="md:col-span-2 text-center md:text-left">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-6">
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-                Hello! I'm Omkar
+                Hello! I'm Omkar Chavan
               </span>
             </h1>
             
@@ -41,17 +41,26 @@ const HeroAboutSection: FC = () => {
               </span>
               {bioPart2}
             </p>
-            {/* <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <Button 
                 size="lg" 
                 asChild 
                 className="bg-transparent border border-primary text-primary transition-all duration-300 hover:scale-105 hover:shadow-lg hover:bg-transparent flex items-center gap-2"
               >
-                <Link href="/omkar-cv.pdf" download target="_blank">
+                <Link href="#contact">
+                  <MessageCircle className="h-5 w-5" /> Get In Touch
+                </Link>
+              </Button>
+              <Button 
+                size="lg" 
+                asChild 
+                className="bg-transparent border border-primary text-primary transition-all duration-300 hover:scale-105 hover:shadow-lg hover:bg-transparent flex items-center gap-2"
+              >
+                <Link href="/omkar-cv.pdf" download target="_blank"> {/* User will need to add omkar-cv.pdf to the /public folder */}
                   <Download className="h-5 w-5" /> Download CV
                 </Link>
               </Button>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

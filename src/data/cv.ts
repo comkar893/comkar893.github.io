@@ -52,7 +52,7 @@ export const educationData: CvEntry[] = [
     title: 'Master of Science in Data Science',
     subtitle: 'Rochester Institute of Technology',
     period: 'Graduated May 2024',
-    description: 'GPA: 4.0/4.0',
+    description: 'GPA: 4.0/4.0. Focused on advanced data analysis, machine learning, and statistical modeling.',
     location: 'Rochester, NY',
     logoUrl: 'https://placehold.co/40x40.png',
     logoAiHint: 'university building',
@@ -78,10 +78,14 @@ export const experienceData: CvEntry[] = [
     subtitle: 'Foundry Digital LLC',
     period: 'May 2024 - Present',
     description: [
-      'I work with a team to manage daily global payouts for a Bitcoin mining pool, ensuring accurate calculations and timely disbursements at scale. I design, maintain, and optimize payment-related microservices, administer databases with controlled access, and ensure the reliability of payment infrastructure. I maintain clear process documentation, manage test and staging environments for safe production releases, handle incident investigation and resolution, provide on-call operational support, and collaborate with stakeholders to resolve critical system and client issues.'
+      'Successfully deployed micro-services and their dependencies on Amazon EKS to leverage scalability, assigned TLS certificates with Cert-Manager for enhanced security and restricted intra-pod communication using Network Policies, reducing manual intervention and ensuring a more efficient and automated environment.',
+      'Streamlined cryptocurrency payment workflows by optimizing system design and transaction processes, ensuring secure and error-free handling which improved operational efficiency, achieving 100% on-time payments.',
+      'Improved the performance of stored procedures executed periodically by the Spring Boot application after identifying bottlenecks, reducing flush times by 50% and enhancing overall system efficiency.',
+      'Conducted an analysis of AWS resource usage, identifying redundant resources and implementing cost savings optimizations which reduced monthly cloud expenses by $20,000 while maintaining performance.',
+      'Designed and implemented back-end solutions for a Spring Boot application, including migrating API endpoints, developing cross-application designs, testing cryptocurrency payments and adding failover mechanisms, ensuring seamless integration and smooth feature releases.',
     ],
     location: 'USA',
-    tags: ['Kotlin', 'Spring Boot', 'MySQL', 'AWS', 'Kubernetes', 'Kafka', 'Datadog'],
+    tags: ['Java', 'Spring Boot', 'AWS', 'EKS', 'Kubernetes', 'Microservices', 'SQL'],
     logoUrl: 'https://placehold.co/40x40.png',
     logoAiHint: 'company office',
   },
@@ -91,10 +95,14 @@ export const experienceData: CvEntry[] = [
     subtitle: 'Foundry Digital LLC',
     period: 'Jan 2024 - May 2024 & May 2023 - Dec 2023',
     description: [
-      'I collaborated with cross-functional teams to support system testing, monitoring, and operational improvements, assisting in issue resolution, streamlining workflows, and providing hands-on support to help teams meet goals while improving overall system reliability and efficiency.'
+      'Built Python scripts for data comparison between database instances which helped to validate data processed by newly developed services in just 20 minutes, eliminating the need for manual comparison. Containerized with Docker to automate dependency installation and environment setup.',
+      'Configured automated alert triggers in Datadog for newly integrated API endpoints in scheduled jobs, enabling timely alerts to identify and debug issues with third-party APIs, facilitating swift troubleshooting actions on critical connection errors and ensuring quicker resolution.',
+      'Enhanced data ingestion efficiency in the MySQL database by optimizing continuous data consumption from Kafka, reducing processing time from 25-30 minutes to just 2-3 minutes.',
+      'Optimized Spring Boot API endpoints and scheduled jobs by addressing bugs, improving data processing speed and system performance, resulting in faster response times and better data accessibility.',
+      'Established a baseline for integration tests across multiple micro-services, standardizing and enabling efficient local testing for early issue detection and instilling team confidence for seamless, reliable production deployments.',
     ],
     location: 'USA',
-    tags: ['Kotlin', 'Python', 'Spring Boot', 'MySQL', 'Docker', 'Kafka', 'Datadog', 'Tableau'],
+    tags: ['Python', 'Docker', 'Datadog', 'MySQL', 'Kafka', 'Spring Boot', 'Data Analysis'],
     logoUrl: 'https://placehold.co/40x40.png',
     logoAiHint: 'company office',
   },
@@ -104,7 +112,10 @@ export const experienceData: CvEntry[] = [
     subtitle: 'Tata Consultancy Services',
     period: 'Nov 2020 - July 2022',
     description: [
-      'I worked with the IPRMS Patent team to modernize the patent filing system by migrating legacy software to a new platform built with modern technologies. I contributed to end-to-end development across frontend and backend, handled data migration to new database structures, ensured required testing coverage, and supported smooth releases through SIT and UAT pipelines to production. I also mentored new team members by guiding them through the codebase and development setup.'
+      'Engineered the end-to-end cloning flow for Invention Declaration Forms using Spring Boot, Java, PostgreSQL and Angular, significantly improving workflow efficiency and addressing prior system limitations, resulting in enhanced usability and cross-jurisdiction compatibility.',
+      'Designed and implemented a comprehensive database schema, optimizing data retrieval through advanced SQL joins across multiple tables and successfully integrated APIs with the user interface, ensuring seamless data flow and performance.',
+      'Leveraged Kafka to synchronize data in real-time between IPRMS and TIPAR modules, eliminating latency issues in the legacy system and ensuring timely and accurate data synchronization.',
+      'Developed a user-friendly interface with Angular for viewing Invention Declaration Form details, streamlining role based access for both inventors and authorities, enhancing user experience and accessibility by enabling a more intuitive and responsive interface.',
     ],
     location: 'India',
     tags: ['Java', 'Spring Boot', 'PostgreSQL', 'Angular', 'Kafka', 'System Design'],
@@ -116,25 +127,14 @@ export const experienceData: CvEntry[] = [
 export const projectData: CvEntry[] = [
   {
     id: 'proj1',
-    title: 'Sentiment Analysis Application',
-    subtitle: 'React, Python, AWS, Terraform',
+    title: 'Personal Portfolio Website (Omkar\'s Odyssey)',
+    subtitle: 'Next.js, React, Tailwind CSS, TypeScript',
     period: '2024',
-    description: 'Add Description',
-    url: 'https://github.com/comkar893/product-sentiment-analysis',
-    tags: ['React, Python, AWS, Terraform'],
+    description: 'The very website you are browsing! An interactive portfolio built with modern web technologies to showcase my skills, projects, and professional journey.',
+    url: '#', // Links to the current site
+    tags: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript', 'Responsive Design', 'Vercel'],
     logoUrl: 'https://placehold.co/400x250.png',
-    logoAiHint: 'Sentiment Analysis',
-  },
-  {
-    id: 'proj2',
-    title: 'Bird Sightings Application',
-    subtitle: 'Next.js, Express, MongoDB, Node JS',
-    period: '2024',
-    description: 'Add Description',
-    url: 'https://github.com/RIT-iSchool/mongo-project-flocknroll',
-    tags: ['Next.js, Express, MongoDB, Node JS'],
-    logoUrl: 'https://placehold.co/400x250.png',
-    logoAiHint: 'Bird Sightings',
+    logoAiHint: 'website portfolio',
   },
 ];
 
