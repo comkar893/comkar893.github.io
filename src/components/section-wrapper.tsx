@@ -21,12 +21,8 @@ const SectionWrapper: FC<SectionWrapperProps> = ({ id, eyebrow, title, subtitle,
         <Reveal>
         <header className="mb-10 flex flex-col gap-3 md:mb-14 md:flex-row md:items-end md:justify-between md:gap-10">
           <div>
-            {eyebrow && (
-              <p className="mb-3 font-mono text-xs tracking-widest text-accent" aria-hidden="true">
-                {eyebrow}
-              </p>
-            )}
-            <h2 id={headingId} className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+            <span className="mb-4 block h-1 w-24 rounded-full bg-accent" aria-hidden="true" />
+            <h2 id={headingId} className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
               {title}
             </h2>
           </div>

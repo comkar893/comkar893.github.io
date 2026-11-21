@@ -23,7 +23,7 @@ const HeroAboutSection: FC = () => {
 
         <p style={{ animationDelay: '240ms' }} className="rise mt-6 max-w-2xl text-justify text-lg leading-relaxed text-foreground/80 md:text-xl">
           Software Engineer with close to 5 years of experience building backend systems and cloud infrastructure. I am currently a{' '}
-          <span className="font-semibold text-accent">Software Engineer III at Foundry Digital LLC</span>, where I own on-time client payouts,
+          <span className="font-semibold text-accent">Software Engineer III</span> at Foundry Digital LLC, where I own on-time client payouts,
           keep the payout workflow robust and failure-proof, and build the infrastructure and test environments that let our team ship with
           confidence. I hold a Data Science degree from{' '}
           <a

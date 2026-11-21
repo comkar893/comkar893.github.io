@@ -45,7 +45,6 @@ export default function HomePage() {
 
         <SectionWrapper
           id="experience"
-          eyebrow="01"
           title="Experience"
         >
           <div>
@@ -55,7 +54,7 @@ export default function HomePage() {
           </div>
         </SectionWrapper>
 
-        <SectionWrapper id="education" eyebrow="02" title="Education">
+        <SectionWrapper id="education"title="Education">
           <div>
             {educationData.map((item) => (
               <CvItem key={item.id} item={item} type="education" />
@@ -63,7 +62,7 @@ export default function HomePage() {
           </div>
         </SectionWrapper>
 
-        <SectionWrapper id="skills" eyebrow="03" title="Skills" className="bg-card">
+        <SectionWrapper id="skills"title="Skills" className="bg-card">
           <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
             {Object.entries(groupedSkills).map(([category, skills]) => (
               <div key={category}>
@@ -78,7 +77,7 @@ export default function HomePage() {
           </div>
         </SectionWrapper>
 
-        <SectionWrapper id="projects" eyebrow="04" title="Projects & Publications">
+        <SectionWrapper id="projects"title="Projects & Publications">
           <div className="space-y-16">
             <div>
               <h3 className="mb-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">Projects</h3>
