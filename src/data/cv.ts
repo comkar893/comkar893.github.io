@@ -37,6 +37,7 @@ export interface CvEntry {
   logoUrl?: string; // Optional: for company/university logo
   logoAiHint?: string; // Optional: hint for AI image generation if logoUrl is a placeholder
   courses?: CourseDetail[]; // Optional: for education entries
+  responsibilities?: string; // Optional: ongoing ownership, shown as one paragraph separate from achievements
 }
 
 export interface Skill {
@@ -74,16 +75,20 @@ export const educationData: CvEntry[] = [
 export const experienceData: CvEntry[] = [
   {
     id: 'exp1',
-    title: 'Software Engineer II',
+    title: 'Software Engineer III',
     subtitle: 'Foundry Digital LLC',
     period: 'May 2024 - Present',
     description: [
+      'Contributed to the launch of the ZEC Mining Pool, focusing on payment workflows and supporting infrastructure to ensure reliable and stable payout operations.',
+      'Designed and developed a configuration-driven blockchain explorer integration, decoupling explorer dependencies to reduce incidents caused by third-party explorer issues; actively contributed to security improvements across the platform.',
       'Successfully deployed micro-services and their dependencies on Amazon EKS to leverage scalability, assigned TLS certificates with Cert-Manager for enhanced security and restricted intra-pod communication using Network Policies, reducing manual intervention and ensuring a more efficient and automated environment.',
       'Streamlined cryptocurrency payment workflows by optimizing system design and transaction processes, ensuring secure and error-free handling which improved operational efficiency, achieving 100% on-time payments.',
       'Improved the performance of stored procedures executed periodically by the Spring Boot application after identifying bottlenecks, reducing flush times by 50% and enhancing overall system efficiency.',
       'Conducted an analysis of AWS resource usage, identifying redundant resources and implementing cost savings optimizations which reduced monthly cloud expenses by $20,000 while maintaining performance.',
       'Designed and implemented back-end solutions for a Spring Boot application, including migrating API endpoints, developing cross-application designs, testing cryptocurrency payments and adding failover mechanisms, ensuring seamless integration and smooth feature releases.',
     ],
+    responsibilities:
+      'I ensure 100% on-time payments to clients and maintain the payout workflow, making it robust and failure-proof. I develop and maintain infrastructure and dependencies, design new features along that path, identify potential issues early and fix them before they affect payouts, and build and maintain test environments so the team can move quickly with confidence.',
     location: 'USA',
     tags: ['Java', 'Spring Boot', 'AWS', 'EKS', 'Kubernetes', 'Microservices', 'SQL'],
     logoUrl: 'https://placehold.co/40x40.png',
@@ -150,6 +155,20 @@ export const publicationData: CvEntry[] = [
   },
 ];
 
+export interface ImpactHighlight {
+  value: string; // The measurable result, as stated in the experience entry
+  label: string; // What it measures
+  source: string; // Where it happened
+}
+
+// Each figure is copied from an existing experience bullet. Do not add figures that aren't in experienceData.
+export const impactHighlights: ImpactHighlight[] = [
+  { value: '$20,000', label: 'Monthly cloud cost reduced while keeping performance', source: 'Software Engineer II, Foundry Digital' },
+  { value: '50%', label: 'Reduction in stored procedure flush times', source: 'Software Engineer II, Foundry Digital' },
+  { value: '100%', label: 'On-time cryptocurrency payments', source: 'Software Engineer II, Foundry Digital' },
+  { value: '25–30 min → 2–3 min', label: 'Kafka data ingestion processing time', source: 'Data Analyst Intern, Foundry Digital' },
+];
+
 export const skillsData: Skill[] = [
   // Languages
   { id: 'sk1', name: 'Java', category: 'Programming Languages', icon: Code2 },
@@ -178,6 +197,7 @@ export const skillsData: Skill[] = [
   // Data & Monitoring
   { id: 'sk13', name: 'Kafka', category: 'Data & Monitoring', icon: Network },
   { id: 'sk16', name: 'Datadog', category: 'Data & Monitoring', icon: LineChart },
+  { id: 'sk23', name: 'dbt', category: 'Data & Monitoring', icon: Database },
   // Methodologies
   { id: 'sk22', name: 'Agile Methodology', category: 'Methodologies', icon: Workflow },
 ];

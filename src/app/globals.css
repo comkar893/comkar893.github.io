@@ -3,6 +3,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 0.8s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
+  }
+}
+
 @layer base {
   html {
     @apply scroll-smooth;
@@ -22,8 +43,8 @@
     --secondary-foreground: 30 30% 25%; /* Dark text for lighter secondary */
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
-    --accent: 30 100% 58%; /* Vibrant Orange */
-    --accent-foreground: 30 100% 10%; /* Dark text for Orange accent */
+    --accent: 350 75% 42%; /* Deeper coral: readable as text on white */
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 89.8%;
@@ -45,7 +66,8 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
-  .dark {
+  @media (prefers-color-scheme: dark) {
+    :root {
     --background: 222 39% 11%; /* Soft Charcoal #111827 */
     --foreground: 210 17% 95%; /* Off-White #F3F4F6 */
 
@@ -64,8 +86,8 @@
     --muted: 215 28% 25%; /* Slightly lighter than card */
     --muted-foreground: 210 14% 80%; /* Light Gray #D1D5DB inspired */
 
-    --accent: 30 100% 58%; /* Vibrant Orange */
-    --accent-foreground: 30 100% 10%; /* Dark text for Orange accent */
+    --accent: 352 94% 71%; /* Coral: the single accent, same as primary */
+    --accent-foreground: 352 90% 15%;
 
     --destructive: 0 70% 55%; /* Standard Destructive Red */
     --destructive-foreground: 0 0% 98%;
@@ -88,6 +110,7 @@
     --sidebar-accent-foreground: 30 30% 25%; /* Dark text on Peach */
     --sidebar-border: 215 28% 22%; /* Main border */
     --sidebar-ring: 352 94% 71%; /* Main ring (Primary) */
+    }
   }
 }
 

@@ -1,15 +1,32 @@
-
 import Header from '@/components/header';
 import HeroAboutSection from '@/components/sections/hero-about-section';
 import ContactSection from '@/components/sections/contact-section';
 import Footer from '@/components/footer';
 import SectionWrapper from '@/components/section-wrapper';
 import CvItem from '@/components/cv-item';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { educationData, experienceData, skillsData, projectData, publicationData } from '@/data/cv';
-import { Lightbulb, BookOpen } from 'lucide-react';
 import type { Skill } from '@/data/cv';
+import { skillBrandIcons } from '@/data/skill-brands';
+import Reveal from '@/components/reveal';
+
+// Shows the brand logo when one exists, otherwise the generic icon from cv.ts.
+function SkillChip({ skill }: { skill: Skill }) {
+  const brand = skillBrandIcons[skill.id];
+  const Fallback = skill.icon;
+
+  return (
+    <li className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-3 py-1.5 text-sm text-foreground/90 transition duration-200 hover:-translate-y-0.5 hover:border-accent hover:text-accent motion-reduce:transform-none">
+      {brand ? (
+        <svg role="img" aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4 shrink-0 fill-current">
+          <path d={brand.path} />
+        </svg>
+      ) : (
+        Fallback && <Fallback className="h-4 w-4 shrink-0" aria-hidden="true" />
+      )}
+      {skill.name}
+    </li>
+  );
+}
 
 export default function HomePage() {
   const groupedSkills = skillsData.reduce((acc, skill) => {
@@ -26,99 +43,61 @@ export default function HomePage() {
       <main className="flex-grow">
         <HeroAboutSection />
 
-        <SectionWrapper 
-          id="education" 
-          title="Education"
-          subtitle="My academic qualifications and relevant coursework."
-          className="bg-card/30"
+        <SectionWrapper
+          id="experience"
+          eyebrow="01"
+          title="Experience"
         >
-          <div className="grid grid-cols-1 gap-6">
-            {educationData.map(item => (
-              <CvItem key={item.id} item={item} type="education" />
-            ))}
-          </div>
-        </SectionWrapper>
-
-        <SectionWrapper 
-          id="experience" 
-          title="Work Experience"
-          subtitle="My professional journey."
-        >
-          <div className="space-y-8">
-            {experienceData.map(item => (
+          <div>
+            {experienceData.map((item) => (
               <CvItem key={item.id} item={item} type="experience" />
             ))}
           </div>
         </SectionWrapper>
 
-        <SectionWrapper
-          id="skills"
-          title="Skills & Expertise"
-          subtitle="My technical proficiency."
-          className="bg-card/30"
-        >
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-center">
-            {Object.entries(groupedSkills).map(([category, skills]) => (
-              <Card key={category} className="flex flex-col overflow-hidden shadow-xl hover:shadow-primary/20 transition-all duration-300 ease-in-out transform hover:-translate-y-1 bg-card">
-                <CardHeader>
-                  <CardTitle className="flex items-center text-xl font-semibold text-primary">
-                    {category}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="flex-grow pt-0">
-                  <div className="flex flex-row flex-wrap gap-2 items-center">
-                    {skills.map(skill => {
-                      const IconComponent = skill.icon;
-                      return (
-                        <Badge 
-                          key={skill.id}
-                          variant="outline" 
-                          className="font-normal flex items-center rounded-md px-3 py-1.5 text-sm border border-primary bg-primary/10 text-foreground transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-0.5 cursor-default"
-                        >
-                          {IconComponent && <IconComponent className="mr-2 h-4 w-4 shrink-0 text-foreground" />}
-                          {skill.name}
-                        </Badge>
-                      );
-                    })}
-                  </div>
-                </CardContent>
-              </Card>
+        <SectionWrapper id="education" eyebrow="02" title="Education">
+          <div>
+            {educationData.map((item) => (
+              <CvItem key={item.id} item={item} type="education" />
             ))}
           </div>
         </SectionWrapper>
 
-        <SectionWrapper 
-          id="projects"
-          title="Projects & Publications"
-          subtitle="Creations I'm proud of and my research contributions."
-        >
-          <div className="mb-16">
-            <h2 className="flex items-center text-2xl md:text-3xl font-semibold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-              <Lightbulb className="mr-3 h-7 w-7 text-primary" />
-              Featured Projects
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {projectData.map(item => (
+        <SectionWrapper id="skills" eyebrow="03" title="Skills" className="bg-card">
+          <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
+            {Object.entries(groupedSkills).map(([category, skills]) => (
+              <div key={category}>
+                <h3 className="mb-4 border-b border-border pb-3 text-sm font-medium text-muted-foreground">{category}</h3>
+                <ul className="flex flex-wrap gap-2">
+                  {skills.map((skill) => (
+                    <SkillChip key={skill.id} skill={skill} />
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </SectionWrapper>
+
+        <SectionWrapper id="projects" eyebrow="04" title="Projects & Publications">
+          <div className="space-y-16">
+            <div>
+              <h3 className="mb-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">Projects</h3>
+              {projectData.map((item) => (
                 <CvItem key={item.id} item={item} type="project" />
               ))}
             </div>
-          </div>
 
-          {publicationData.length > 0 && (
-            <div>
-              <h2 className="flex items-center text-2xl md:text-3xl font-semibold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-                <BookOpen className="mr-3 h-7 w-7 text-primary" />
-                Publications
-              </h2>
-              <div className="grid grid-cols-1 gap-6">
-                {publicationData.map(item => (
+            {publicationData.length > 0 && (
+              <div>
+                <h3 className="mb-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">Publications</h3>
+                {publicationData.map((item) => (
                   <CvItem key={item.id} item={item} type="publication" />
                 ))}
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </SectionWrapper>
-        
+
         <ContactSection />
       </main>
       <Footer />

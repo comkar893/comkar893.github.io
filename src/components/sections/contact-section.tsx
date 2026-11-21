@@ -1,101 +1,37 @@
-
-'use client';
-
-import { useFormStatus } from 'react-dom';
+import type { FC } from 'react';
 import SectionWrapper from '@/components/section-wrapper';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Loader2, Send } from 'lucide-react';
-import { cn } from '@/lib/utils';
 
-function SubmitButton() {
-  const { pending } = useFormStatus();
+// The contact form is disabled until a form service is chosen (static hosting cannot run server actions).
+// Direct links are the reliable option for now.
+const ContactSection: FC = () => {
   return (
-    <Button 
-      type="submit" 
-      disabled={pending} 
-      size="lg" 
-      className={cn(
-        "bg-transparent border border-primary text-primary transition-all duration-300 hover:scale-105 hover:shadow-lg hover:bg-transparent flex items-center gap-2",
-        pending && "cursor-not-allowed bg-transparent text-primary border-primary", // Keep border and text for pending
-        {"disabled:opacity-50 disabled:cursor-not-allowed disabled:text-muted-foreground disabled:border-muted-foreground/50 disabled:shadow-none hover:bg-transparent": pending} // Ensure disabled pending also has transparent hover
-      )}
-      aria-disabled={pending}
-    >
-      {pending ? (
-        <>
-          <Loader2 className="mr-2 h-5 w-5 animate-spin" /> Sending...
-        </>
-      ) : (
-        <>
-          <Send className="mr-2 h-5 w-5" /> Send Message
-        </>
-      )}
-    </Button>
-  );
-}
+    <SectionWrapper id="contact" eyebrow="05" title="Contact">
+      <div className="max-w-2xl">
+        <p className="text-justify text-lg leading-relaxed text-foreground/85 md:text-xl">
+          The fastest way to reach me is email. I'm happy to talk about engineering roles, collaboration, or anything on this site.
+        </p>
 
-const ContactSection = () => {
-  // Contact form disabled for now: static hosting (GitHub Pages) can't run the server action.
-  return (
-    <SectionWrapper
-      id="contact"
-      title="Get In Touch"
-      subtitle="Have a question, a project idea, or just want to say hi? I'd love to hear from you!"
-    >
-      <Card className="max-w-2xl mx-auto shadow-2xl border-primary/20">
-        <CardHeader>
-          <CardTitle className="text-2xl text-center">Send me a message</CardTitle>
-          <CardDescription className="text-center">
-            The contact form is temporarily unavailable. Please check back soon.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
-            <div>
-              <Label htmlFor="name" className="block text-sm font-medium text-foreground mb-1">Full Name</Label>
-              <Input
-                type="text"
-                id="name"
-                name="name"
-                required
-                className="bg-card border-border focus:ring-primary focus:border-primary"
-                aria-describedby="name-error"
-              />
-            </div>
-
-            <div>
-              <Label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">Email Address</Label>
-              <Input
-                type="email"
-                id="email"
-                name="email"
-                required
-                className="bg-card border-border focus:ring-primary focus:border-primary"
-                aria-describedby="email-error"
-              />
-            </div>
-
-            <div>
-              <Label htmlFor="message" className="block text-sm font-medium text-foreground mb-1">Message</Label>
-              <Textarea
-                id="message"
-                name="message"
-                rows={5}
-                required
-                className="bg-card border-border focus:ring-primary focus:border-primary min-h-[120px]"
-                aria-describedby="message-error"
-              />
-            </div>
-            <div className="flex justify-end">
-              <SubmitButton />
-            </div>
-          </form>
-        </CardContent>
-      </Card>
+        <ul className="mt-10 space-y-4">
+          <li>
+            <a
+              href="mailto:comkar893@gmail.com"
+              className="inline-flex text-2xl font-semibold tracking-tight text-foreground underline decoration-border underline-offset-8 transition-colors hover:text-accent hover:decoration-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm md:text-3xl"
+            >
+              comkar893@gmail.com
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://linkedin.com/in/omkarchavan25"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-sm text-base font-medium text-muted-foreground transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              LinkedIn →
+            </a>
+          </li>
+        </ul>
+      </div>
     </SectionWrapper>
   );
 };

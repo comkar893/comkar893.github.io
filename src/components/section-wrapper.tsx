@@ -1,49 +1,39 @@
 import type { FC, ReactNode } from 'react';
 import { cn } from '@/lib/utils';
+import Reveal from '@/components/reveal';
 
 interface SectionWrapperProps {
   id: string;
-  title?: string;
+  eyebrow?: string;
+  title: string;
   subtitle?: string;
   children: ReactNode;
   className?: string;
-  titleClassName?: string;
-  contentClassName?: string;
 }
 
-const SectionWrapper: FC<SectionWrapperProps> = ({
-  id,
-  title,
-  subtitle,
-  children,
-  className,
-  titleClassName,
-  contentClassName,
-}) => {
+// Full-width layout: heading row on top (title left, short subtitle right on desktop), content below.
+const SectionWrapper: FC<SectionWrapperProps> = ({ id, eyebrow, title, subtitle, children, className }) => {
+  const headingId = `${id}-heading`;
+
   return (
-    <section
-      id={id}
-      className={cn('py-16 md:py-24 scroll-mt-16', className)} // scroll-mt matches header height
-    >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-xl">
-        {title && (
-          <div className="mb-12 text-center">
-            <h2
-              className={cn(
-                'text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent',
-                titleClassName
-              )}
-            >
-              {title}
-            </h2>
-            {subtitle && (
-              <p className="mt-4 text-lg md:text-xl text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent max-w-2xl mx-auto">
-                {subtitle}
+    <section id={id} aria-labelledby={headingId} className={cn('scroll-mt-20 border-t border-border py-16 md:py-24', className)}>
+      <div className="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+        <Reveal>
+        <header className="mb-10 flex flex-col gap-3 md:mb-14 md:flex-row md:items-end md:justify-between md:gap-10">
+          <div>
+            {eyebrow && (
+              <p className="mb-3 font-mono text-xs tracking-widest text-accent" aria-hidden="true">
+                {eyebrow}
               </p>
             )}
+            <h2 id={headingId} className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+              {title}
+            </h2>
           </div>
-        )}
-        <div className={cn(contentClassName)}>{children}</div>
+          {subtitle && <p className="max-w-md text-base leading-relaxed text-muted-foreground md:text-right">{subtitle}</p>}
+        </header>
+        </Reveal>
+        <Reveal delay={120}>{children}</Reveal>
       </div>
     </section>
   );

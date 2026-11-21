@@ -1,150 +1,115 @@
-
 'use client';
 
 import type { FC } from 'react';
 import { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { ExternalLink, MapPin, BookText, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowUpRight, ChevronDown } from 'lucide-react';
 import type { CvEntry, CourseDetail } from '@/data/cv';
+import { cn } from '@/lib/utils';
 
 interface CvItemProps {
   item: CvEntry;
   type: 'education' | 'experience' | 'project' | 'publication';
 }
 
+const linkLabel: Record<CvItemProps['type'], string> = {
+  education: 'View details',
+  experience: 'View details',
+  project: 'View project',
+  publication: 'Read publication',
+};
+
+// One entry: period on the left, role and achievements on the right.
 const CvItem: FC<CvItemProps> = ({ item, type }) => {
   const descriptions = Array.isArray(item.description) ? item.description : [item.description];
   const [showCourses, setShowCourses] = useState(false);
+  const isList = descriptions.length > 1;
 
   return (
-    <Card className="w-full overflow-hidden shadow-xl hover:shadow-primary/20 transition-all duration-300 ease-in-out transform hover:-translate-y-1 flex flex-col">
-      {type === 'project' && item.logoUrl && (
-         <div className="aspect-video overflow-hidden">
-          <Image
-            src={item.logoUrl}
-            alt={`${item.title} preview`}
-            width={400}
-            height={250}
-            className="object-cover w-full h-full transition-transform duration-500 hover:scale-110"
-            {...(item.logoAiHint && {'data-ai-hint': item.logoAiHint})}
-          />
-        </div>
-      )}
-      <CardHeader className="pb-3">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-          {type !== 'project' && item.logoUrl && (
-            <Image 
-              src={item.logoUrl} 
-              alt={`${item.subtitle || item.title} logo`} 
-              width={40} 
-              height={40} 
-              className="rounded-md mr-3 hidden sm:block"
-              {...(item.logoAiHint && {'data-ai-hint': item.logoAiHint})}
-            />
+    <article className="border-b border-border py-8 first:pt-0 last:border-b-0 last:pb-0">
+      <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+        <div className="min-w-0">
+          <h3 className="text-lg font-semibold leading-snug text-foreground md:text-xl">{item.title}</h3>
+          {item.subtitle && (
+            <p className="mt-1 text-base text-muted-foreground">
+              {item.subtitle}
+              {item.location && <span>{`, ${item.location}`}</span>}
+            </p>
           )}
-          <div className="flex-grow">
-            <CardTitle className="text-xl md:text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">{item.title}</CardTitle>
-            {item.subtitle && (
-              <CardDescription className="text-md text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-                {item.subtitle}{item.location && `, ${item.location}`}
-              </CardDescription>
-            )}
-          </div>
-          <p className="text-sm text-muted-foreground whitespace-nowrap pt-1 sm:pt-0">{item.period}</p>
         </div>
-      </CardHeader>
-      <CardContent className="space-y-3 flex-grow">
-        {descriptions.map((desc, index) => (
-          <p key={index} className="text-foreground/90 leading-relaxed">
-            {type === 'experience' && descriptions.length > 1 ? `• ${desc}` : desc}
-          </p>
-        ))}
+        <p className="shrink-0 font-mono text-sm text-muted-foreground">{item.period}</p>
+      </div>
+
+      <div className="min-w-0">
+
+
+        {isList ? (
+          <ul className="mt-4 space-y-3">
+            {descriptions.map((desc, index) => (
+              <li
+                key={index}
+                className="relative pl-5 text-justify leading-relaxed text-foreground/85 before:absolute before:left-0 before:top-[0.75em] before:h-px before:w-2.5 before:bg-accent"
+              >
+                {desc}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="mt-4 text-justify leading-relaxed text-foreground/85">{descriptions[0]}</p>
+        )}
+
+        {item.responsibilities && (
+          <div className="mt-6">
+            <h4 className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Current responsibilities</h4>
+            <p className="mt-3 text-justify leading-relaxed text-foreground/85">{item.responsibilities}</p>
+          </div>
+        )}
+
+        {item.tags && item.tags.length > 0 && (
+          <ul className="mt-4 flex flex-wrap gap-x-3 gap-y-1 font-mono text-xs text-muted-foreground">
+            {item.tags.map((tag) => (
+              <li key={tag}>{tag}</li>
+            ))}
+          </ul>
+        )}
 
         {type === 'education' && item.courses && item.courses.length > 0 && (
-          <div className="mt-4 pt-3 border-t border-border/50">
-            <div className="flex items-center justify-between mb-2">
-              <h4 className="flex items-center text-sm font-semibold text-foreground">
-                <BookText className="mr-2 h-4 w-4 text-primary" />
-                Relevant Coursework:
-              </h4>
-              <button
-                onClick={() => setShowCourses(!showCourses)}
-                className="flex items-center text-xs text-accent hover:text-primary focus:outline-none"
-                aria-expanded={showCourses}
-                aria-controls={`courses-${item.id}`}
-              >
-                {showCourses ? 'Hide Courses' : 'Show Courses'}
-                {showCourses ? <ChevronUp className="ml-1 h-3 w-3" /> : <ChevronDown className="ml-1 h-3 w-3" />}
-              </button>
-            </div>
-            {showCourses && (
-              <div 
-                id={`courses-${item.id}`} 
-                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 animate-accordion-down mt-2 justify-center"
-              >
-                {item.courses.map((course: CourseDetail, index: number) => (
-                  <Card key={index} className="bg-card border shadow-xl hover:shadow-2xl transition-shadow duration-300">
-                    <CardContent className="p-3">
-                      <p className="font-medium text-foreground/90 text-sm">{course.name}</p>
-                      {course.description && (
-                        <p className="text-xs text-muted-foreground mt-1">{course.description}</p>
-                      )}
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
-        
-        {(item.location || item.url) && type !== 'education' && !item.subtitle?.includes(item.location || '') && ( // Conditionally render this block
-          <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground pt-2">
-            {item.location && (
-              <span className="flex items-center">
-                <MapPin className="mr-1.5 h-4 w-4 text-accent" /> {item.location}
-              </span>
-            )}
-            {item.url && (
-              <Link href={item.url} target="_blank" rel="noopener noreferrer" className="flex items-center text-accent hover:text-primary transition-colors">
-                <ExternalLink className="mr-1.5 h-4 w-4" /> View {type === 'project' ? 'Project' : (type === 'publication' ? 'Publication' : 'Details')}
-              </Link>
-            )}
-          </div>
-        )}
-         {/* Special handling for education items if location was already displayed with subtitle */}
-         {type === 'education' && item.url && (
-          <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground pt-2">
-            <Link href={item.url} target="_blank" rel="noopener noreferrer" className="flex items-center text-accent hover:text-primary transition-colors">
-                <ExternalLink className="mr-1.5 h-4 w-4" /> View Details
-            </Link>
-          </div>
-        )}
-         {/* Handling for project/publication URL when location might not be present but URL is */}
-         {(type === 'project' || type === 'publication') && item.url && !item.location && (
-            <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground pt-2">
-                 <Link href={item.url} target="_blank" rel="noopener noreferrer" className="flex items-center text-accent hover:text-primary transition-colors">
-                    <ExternalLink className="mr-1.5 h-4 w-4" /> View {type === 'project' ? 'Project' : 'Publication'}
-                </Link>
-            </div>
-         )}
-      </CardContent>
-      {item.tags && item.tags.length > 0 && (
-        <CardFooter className="flex flex-wrap gap-2 pt-4">
-          {item.tags.map((tag) => (
-            <Badge 
-              key={tag}
-              variant="outline" 
-              className="font-normal flex items-center rounded-md px-3 py-1.5 text-sm border border-primary bg-primary/10 text-primary transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-0.5 cursor-default"
+          <div className="mt-6">
+            <button
+              type="button"
+              onClick={() => setShowCourses(!showCourses)}
+              className="inline-flex items-center gap-1.5 rounded-sm text-sm font-medium text-accent underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              aria-expanded={showCourses}
+              aria-controls={`courses-${item.id}`}
             >
-              {tag}
-            </Badge>
-          ))}
-        </CardFooter>
-      )}
-    </Card>
+              Relevant coursework ({item.courses.length})
+              <ChevronDown className={cn('h-4 w-4 transition-transform duration-200', showCourses && 'rotate-180')} aria-hidden="true" />
+            </button>
+            {showCourses && (
+              <ul id={`courses-${item.id}`} className="mt-4 grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2">
+                {item.courses.map((course: CourseDetail, index: number) => (
+                  <li key={index} className="text-sm text-foreground/85">
+                    {course.name}
+                    {course.description && <span className="block text-xs text-muted-foreground">{course.description}</span>}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
+
+        {item.url && (
+          <a
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group mt-5 inline-flex items-center gap-1 rounded-sm text-sm font-medium text-accent underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            {linkLabel[type]}
+            <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+          </a>
+        )}
+      </div>
+    </article>
   );
 };
 
