@@ -81,7 +81,7 @@ const HeroAboutSection: FC = () => {
               Email me
             </a>
             <a
-              href="/omkar-cv.pdf"
+              href="/omkar-chavan.pdf"
               download
               className="inline-flex items-center justify-center rounded-md border border-border px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >

@@ -1,6 +1,6 @@
 'use client';
 
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
 import { useState } from 'react';
 import { ArrowUpRight, ChevronDown } from 'lucide-react';
 import TypedTitle from '@/components/typed-title';
@@ -22,13 +22,28 @@ const linkLabel: Record<CvItemProps['type'], string> = {
   publication: 'Read publication',
 };
 
+// Bolds measurable results (percentages, dollar amounts, minutes) so they stand out when scanning.
+const METRIC = /(\$\d[\d,]*|\d+%|\d+–\d+ minutes|\d+ minutes)/g;
+function emphasize(text: string): ReactNode[] {
+  return text.split(METRIC).map((part, i) =>
+    i % 2 === 1 ? (
+      <strong key={i} className="font-semibold text-foreground">
+        {part}
+      </strong>
+    ) : (
+      part
+    )
+  );
+}
+
 // Logo for a tag, when the same technology appears in the Skills section.
 const brandByName = new Map(skillsData.map((skill) => [skill.name, skillBrandIcons[skill.id]]));
 
 // Two columns: context on the left (period, company, domains, tech stack), the work itself on the right.
 const CvItem: FC<CvItemProps> = ({ item, type }) => {
-  const descriptions = Array.isArray(item.description) ? item.description : [item.description];
-  const isList = descriptions.length > 1;
+  // A string description may hold several paragraphs separated by a blank line; an array renders as a bulleted list.
+  const descriptions = Array.isArray(item.description) ? item.description : item.description.split('\n\n');
+  const isList = Array.isArray(item.description) && item.description.length > 1;
   const [showCourses, setShowCourses] = useState(false);
   const [showFocus, setShowFocus] = useState(false);
   const hasFocus = Boolean((item.tags && item.tags.length > 0) || (item.practices && item.practices.length > 0));
@@ -74,7 +89,7 @@ const CvItem: FC<CvItemProps> = ({ item, type }) => {
             aria-controls={`focus-${item.id}`}
             className="mt-5 inline-flex items-center gap-1.5 rounded-sm text-sm font-medium text-accent underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:hidden"
           >
-            Skills &amp; focus areas
+            Skills &amp; Focus Areas
             <ChevronDown className={cn('h-4 w-4 transition-transform duration-200', showFocus && 'rotate-180')} aria-hidden="true" />
           </button>
         )}
@@ -106,7 +121,7 @@ const CvItem: FC<CvItemProps> = ({ item, type }) => {
         )}
         {item.practices && item.practices.length > 0 && (
           <div className="mt-5">
-            <h4 className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Focus Areas</h4>
+            <h4 className="text-sm font-medium text-muted-foreground">Focus Areas</h4>
             <p className="mt-2 text-sm leading-relaxed text-foreground/85">{item.practices.join(' · ')}</p>
           </div>
         )}
@@ -135,13 +150,17 @@ const CvItem: FC<CvItemProps> = ({ item, type }) => {
             ))}
           </ul>
         ) : (
-          <p className="mt-4 text-justify leading-relaxed text-foreground/85">{descriptions[0]}</p>
+          descriptions.map((paragraph, index) => (
+            <p key={index} className="mt-4 text-justify leading-relaxed text-foreground/85">
+              {emphasize(paragraph)}
+            </p>
+          ))
         )}
 
         {item.responsibilities && (
           <div className="mt-6">
-            <h4 className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Current responsibilities</h4>
-            <p className="mt-3 text-justify leading-relaxed text-foreground/85">{item.responsibilities}</p>
+            <h4 className="text-sm font-medium text-muted-foreground">Current Responsibilities</h4>
+            <p className="mt-3 text-justify leading-relaxed text-foreground/85">{emphasize(item.responsibilities)}</p>
           </div>
         )}
 
@@ -154,7 +173,7 @@ const CvItem: FC<CvItemProps> = ({ item, type }) => {
               aria-expanded={showCourses}
               aria-controls={`courses-${item.id}`}
             >
-              Relevant coursework ({item.courses.length})
+              Relevant Coursework ({item.courses.length})
               <ChevronDown className={cn('h-4 w-4 transition-transform duration-200', showCourses && 'rotate-180')} aria-hidden="true" />
             </button>
             {showCourses && (

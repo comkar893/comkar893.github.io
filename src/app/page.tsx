@@ -6,6 +6,7 @@ import CvItem from '@/components/cv-item';
 import { educationData, experienceData, skillsData, projectData, publicationData } from '@/data/cv';
 import type { Skill } from '@/data/cv';
 import SkillsMap from '@/components/skills-map';
+import ImpactStrip from '@/components/impact-strip';
 
 export default function HomePage() {
   // IDEs are left off the site; they still appear in the CV.
@@ -23,6 +24,8 @@ export default function HomePage() {
       <Header />
       <main className="flex-grow">
         <HeroAboutSection />
+
+        <ImpactStrip />
 
         <SectionWrapper
           id="experience"

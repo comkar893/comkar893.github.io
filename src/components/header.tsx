@@ -29,12 +29,18 @@ const Header: FC = () => {
             </Link>
           ))}
           <Link
-            href="/omkar-cv.pdf"
+            href="/omkar-chavan.pdf"
             download
             className="rounded-md border border-border px-3.5 py-1.5 text-sm font-medium text-foreground transition-colors duration-200 hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             Download CV
           </Link>
+          <a
+            href="mailto:comkar893@gmail.com"
+            className="rounded-md bg-foreground px-3.5 py-1.5 text-sm font-medium text-background transition-opacity duration-200 hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
+            Email me
+          </a>
         </nav>
 
         <div className="md:hidden">
@@ -56,9 +62,17 @@ const Header: FC = () => {
                   </SheetClose>
                 ))}
                 <SheetClose asChild>
-                  <Link href="/omkar-cv.pdf" download className="mt-4 rounded-md border border-border px-3 py-3 text-center text-base font-medium text-foreground hover:border-accent hover:text-accent">
+                  <Link href="/omkar-chavan.pdf" download className="mt-4 rounded-md border border-border px-3 py-3 text-center text-base font-medium text-foreground hover:border-accent hover:text-accent">
                     Download CV
                   </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <a
+                    href="mailto:comkar893@gmail.com"
+                    className="mt-2 rounded-md bg-foreground px-3 py-3 text-center text-base font-medium text-background hover:opacity-85"
+                  >
+                    Email me
+                  </a>
                 </SheetClose>
               </nav>
             </SheetContent>
