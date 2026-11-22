@@ -152,7 +152,6 @@ export const publicationData: CvEntry[] = [
     period: 'April 2024',
     description: 'A research paper accepted and presented at the MSR 2024 Mining Challenge, part of the ICSE Conference. It detailed the analysis of conversations between developers and ChatGPT for software refactoring, provided insights into AI-assisted development and was showcased at the conference.',
     url: 'https://dl.acm.org/doi/abs/10.1145/3643991.3644874',
-    tags: ['Software Engineering', 'AI', 'ChatGPT', 'Refactoring', 'Empirical Study', 'MSR', 'ICSE'],
   },
 ];
 
@@ -199,6 +198,4 @@ export const skillsData: Skill[] = [
   { id: 'sk13', name: 'Kafka', category: 'Data & Monitoring', icon: Network },
   { id: 'sk16', name: 'Datadog', category: 'Data & Monitoring', icon: LineChart },
   { id: 'sk23', name: 'dbt', category: 'Data & Monitoring', icon: Database },
-  // Methodologies
-  { id: 'sk22', name: 'Agile Methodology', category: 'Methodologies', icon: Workflow },
 ];

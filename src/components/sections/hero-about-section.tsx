@@ -1,7 +1,5 @@
 import type { FC } from 'react';
-
-const textLinkClass =
-  'rounded-sm text-sm font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-accent hover:decoration-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring';
+import { Github, Linkedin } from 'lucide-react';
 
 // Placeholder for a headshot: a code editor window with a blinking cursor.
 const CodeWindow: FC = () => (
@@ -53,10 +51,11 @@ const HeroAboutSection: FC = () => {
           </h1>
 
           <p style={{ animationDelay: '240ms' }} className="rise mt-6 max-w-2xl text-justify text-lg leading-relaxed text-foreground/80 md:text-xl">
-            Software Engineer with close to 5 years of experience building backend systems and cloud infrastructure. I am currently a{' '}
-            <span className="font-semibold text-accent">Software Engineer III</span> at Foundry Digital LLC, where I own on-time client payouts,
-            keep the payout workflow robust and failure-proof, and build the infrastructure and test environments that let our team ship with
-            confidence. I hold a Data Science degree from{' '}
+            Hi, I&apos;m Omkar. I&apos;m a{' '}
+            <span className="font-semibold text-accent">Software Engineer III</span> at Foundry Digital LLC with close to 5 years of
+            experience building backend systems and cloud infrastructure. I own on-time client payouts, keep the payout workflow robust and
+            failure-proof, and build the infrastructure and test environments that help our team ship with confidence. I hold a Data Science
+            degree from{' '}
             <a
               href="https://www.rit.edu/"
               target="_blank"
@@ -84,14 +83,30 @@ const HeroAboutSection: FC = () => {
             </a>
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
-            <a href="https://linkedin.com/in/omkarchavan25" target="_blank" rel="noopener noreferrer" className={textLinkClass}>
-              LinkedIn
-            </a>
-            <a href="https://github.com/comkar893" target="_blank" rel="noopener noreferrer" className={textLinkClass}>
-              GitHub
-            </a>
-          </div>
+          <ul className="mt-6 flex flex-wrap justify-center gap-2 md:justify-start">
+            <li>
+              <a
+                href="https://linkedin.com/in/omkarchavan25"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-border px-3.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <Linkedin className="h-4 w-4" aria-hidden="true" />
+                LinkedIn
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/comkar893"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-border px-3.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <Github className="h-4 w-4" aria-hidden="true" />
+                GitHub
+              </a>
+            </li>
+          </ul>
         </div>
 
         <div className="hidden md:block">

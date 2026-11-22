@@ -29,6 +29,8 @@ const CvItem: FC<CvItemProps> = ({ item, type }) => {
   const descriptions = Array.isArray(item.description) ? item.description : [item.description];
   const isList = descriptions.length > 1;
   const [showCourses, setShowCourses] = useState(false);
+  const [showFocus, setShowFocus] = useState(false);
+  const hasFocus = Boolean((item.tags && item.tags.length > 0) || (item.practices && item.practices.length > 0));
 
   return (
     <article className="grid grid-cols-1 gap-6 border-b border-border py-10 first:pt-0 last:border-b-0 last:pb-0 md:grid-cols-12 md:gap-10">
@@ -63,6 +65,19 @@ const CvItem: FC<CvItemProps> = ({ item, type }) => {
           </ul>
         )}
 
+        {hasFocus && (
+          <button
+            type="button"
+            onClick={() => setShowFocus(!showFocus)}
+            aria-expanded={showFocus}
+            aria-controls={`focus-${item.id}`}
+            className="mt-5 inline-flex items-center gap-1.5 rounded-sm text-sm font-medium text-accent underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:hidden"
+          >
+            Skills &amp; focus areas
+            <ChevronDown className={cn('h-4 w-4 transition-transform duration-200', showFocus && 'rotate-180')} aria-hidden="true" />
+          </button>
+        )}
+        <div id={`focus-${item.id}`} className={cn(showFocus ? 'block' : 'hidden', 'md:block')}>
         {item.tags && item.tags.length > 0 && (
           <ul className="mt-4 flex flex-wrap gap-x-3 gap-y-1.5">
             {item.tags.map((tag) => {
@@ -73,7 +88,7 @@ const CvItem: FC<CvItemProps> = ({ item, type }) => {
                   className={cn(
                     'inline-flex items-center gap-2',
                     type === 'publication'
-                      ? 'rounded-md border border-border bg-background px-3 py-1.5 text-sm text-foreground/90 transition duration-200 hover:-translate-y-0.5 hover:border-accent hover:text-accent motion-reduce:transform-none'
+                      ? 'rounded-md border border-border bg-background px-3 py-1.5 text-sm text-foreground/90 transition duration-200 hover:-translate-y-0.5 hover:border-accent hover:text-accent focus-visible:border-accent active:scale-95 active:border-accent active:text-accent motion-reduce:transform-none motion-reduce:active:scale-100'
                       : 'gap-1.5 font-mono text-xs text-muted-foreground'
                   )}
                 >
@@ -94,6 +109,7 @@ const CvItem: FC<CvItemProps> = ({ item, type }) => {
             <p className="mt-2 text-sm leading-relaxed text-foreground/85">{item.practices.join(' · ')}</p>
           </div>
         )}
+        </div>
       </aside>
 
       <div className="min-w-0 md:col-span-8">

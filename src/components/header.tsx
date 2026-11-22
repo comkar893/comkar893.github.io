@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Logo from '@/components/logo';
 import type { FC } from 'react';
 import { Menu } from 'lucide-react';
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTitle, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 
 const navItems = [
@@ -46,6 +46,7 @@ const Header: FC = () => {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[280px] bg-background p-6">
+              <SheetTitle className="sr-only">Navigation menu</SheetTitle>
               <nav aria-label="Mobile" className="mt-8 flex flex-col gap-1">
                 {navItems.map((item) => (
                   <SheetClose asChild key={item.href}>

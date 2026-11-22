@@ -7,14 +7,18 @@ import { educationData, experienceData, skillsData, projectData, publicationData
 import type { Skill } from '@/data/cv';
 import { skillBrandIcons } from '@/data/skill-brands';
 import Reveal from '@/components/reveal';
+import SkillsMap from '@/components/skills-map';
 
 // Shows the brand logo when one exists, otherwise the generic icon from cv.ts.
-function SkillChip({ skill }: { skill: Skill }) {
+function SkillChip({ skill, index }: { skill: Skill; index: number }) {
   const brand = skillBrandIcons[skill.id];
   const Fallback = skill.icon;
 
   return (
-    <li className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-3 py-1.5 text-sm text-foreground/90 transition duration-200 hover:-translate-y-0.5 hover:border-accent hover:text-accent motion-reduce:transform-none">
+    <li
+      style={{ animationDelay: `${(index % 5) * 0.5}s`, animationDuration: `${3.5 + (index % 3) * 0.6}s` }}
+      className="animate-float inline-flex items-center gap-2 rounded-md border border-border bg-background px-3 py-1.5 text-sm text-foreground/90 transition-colors duration-200 hover:border-accent hover:text-accent focus-visible:border-accent focus-visible:text-accent active:scale-95 active:border-accent active:text-accent motion-reduce:active:scale-100"
+    >
       {brand ? (
         <svg role="img" aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4 shrink-0 fill-current">
           <path d={brand.path} />
@@ -62,18 +66,7 @@ export default function HomePage() {
         </SectionWrapper>
 
         <SectionWrapper id="skills"title="Skills" className="bg-card">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {Object.entries(groupedSkills).map(([category, skills]) => (
-              <div key={category} className="flex flex-col rounded-lg border border-border bg-background p-5">
-                <h3 className="mb-4 text-sm font-semibold text-foreground">{category}</h3>
-                <ul className="flex flex-wrap gap-2">
-                  {skills.map((skill) => (
-                    <SkillChip key={skill.id} skill={skill} />
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+          <SkillsMap skills={skillsData.filter((skill) => skill.id !== 'sk18' && skill.id !== 'sk19')} />
         </SectionWrapper>
 
         <SectionWrapper id="projects" title="Publications">
