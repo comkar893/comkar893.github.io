@@ -7,6 +7,7 @@ import TypedTitle from '@/components/typed-title';
 import { skillsData } from '@/data/cv';
 import type { CvEntry, CourseDetail } from '@/data/cv';
 import { skillBrandIcons } from '@/data/skill-brands';
+import { brandFill } from '@/lib/brand';
 import { cn } from '@/lib/utils';
 
 interface CvItemProps {
@@ -46,13 +47,13 @@ const CvItem: FC<CvItemProps> = ({ item, type }) => {
         {item.domains && item.domains.length > 0 && (
           <ul className="mt-5 space-y-2">
             {item.domains.map((domain) => (
-              <li key={domain.name} className="rounded-md border-l-2 border-accent bg-card px-4 py-3">
+              <li key={domain.name} className="flex min-h-[5.5rem] flex-col justify-center rounded-md border-l-2 border-accent bg-card px-4 py-3">
                 <div className="flex items-center justify-between gap-2">
                   <p className="text-base font-semibold text-foreground">{domain.name}</p>
                   {domain.icons && (
                     <span className="flex shrink-0 items-center gap-1.5 text-foreground/80">
                       {domain.icons.map((icon) => (
-                        <svg key={icon.slug} role="img" aria-label={icon.title} viewBox="0 0 24 24" className="h-4 w-4 fill-current">
+                        <svg key={icon.slug} role="img" aria-label={icon.title} viewBox="0 0 24 24" className="h-4 w-4" style={{ fill: brandFill(icon.hex) }}>
                           <path d={icon.path} />
                         </svg>
                       ))}
@@ -93,7 +94,7 @@ const CvItem: FC<CvItemProps> = ({ item, type }) => {
                   )}
                 >
                   {brand && (
-                    <svg role="img" aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4 shrink-0 fill-current">
+                    <svg role="img" aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4 shrink-0" style={{ fill: brandFill(brand.hex) }}>
                       <path d={brand.path} />
                     </svg>
                   )}

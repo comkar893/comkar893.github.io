@@ -55,15 +55,6 @@
   }
 }
 
-.animate-float {
-  animation: float 4s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-float {
-    animation: none;
-  }
-}
 
 @layer base {
   html {

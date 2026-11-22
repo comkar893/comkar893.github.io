@@ -1,5 +1,7 @@
 import type { FC } from 'react';
-import { Github, Linkedin } from 'lucide-react';
+import { Linkedin } from 'lucide-react';
+import { siGithub } from 'simple-icons';
+import { brandFill } from '@/lib/brand';
 
 // Placeholder for a headshot: a code editor window with a blinking cursor.
 const CodeWindow: FC = () => (
@@ -26,7 +28,7 @@ const CodeWindow: FC = () => (
       </p>
       <p>{'}'};</p>
       <p className="flex items-center">
-        <span className="caret-blink inline-block h-4 w-[0.5ch] bg-accent" />
+        <span className="inline-block h-4 w-[0.5ch] bg-accent" />
       </p>
     </div>
   </div>
@@ -49,6 +51,10 @@ const HeroAboutSection: FC = () => {
           >
             Omkar Chavan
           </h1>
+
+          <p style={{ animationDelay: '180ms' }} className="rise mt-5 max-w-2xl text-lg font-medium text-foreground md:text-xl">
+            Building reliable payment systems.
+          </p>
 
           <p style={{ animationDelay: '240ms' }} className="rise mt-6 max-w-2xl text-justify text-lg leading-relaxed text-foreground/80 md:text-xl">
             Hi, I&apos;m Omkar. I&apos;m a{' '}
@@ -91,7 +97,7 @@ const HeroAboutSection: FC = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-border px-3.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                <Linkedin className="h-4 w-4" aria-hidden="true" />
+                <Linkedin className="h-4 w-4 shrink-0" aria-hidden="true" style={{ color: '#0A66C2' }} />
                 LinkedIn
               </a>
             </li>
@@ -102,7 +108,9 @@ const HeroAboutSection: FC = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-border px-3.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                <Github className="h-4 w-4" aria-hidden="true" />
+                <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" aria-hidden="true" style={{ fill: brandFill(siGithub.hex) }}>
+                  <path d={siGithub.path} />
+                </svg>
                 GitHub
               </a>
             </li>
