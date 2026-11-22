@@ -70,7 +70,7 @@ const HeroAboutSection: FC = () => {
             >
               Rochester Institute of Technology
             </a>{' '}
-            and am particularly interested in the finance and crypto domain, where reliable payment systems matter most.
+            and am particularly interested in fintech, where reliable payment systems matter most.
           </p>
 
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">

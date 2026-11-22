@@ -23,7 +23,8 @@ const linkLabel: Record<CvItemProps['type'], string> = {
 };
 
 // Bolds measurable results (percentages, dollar amounts, minutes) so they stand out when scanning.
-const METRIC = /(\$\d[\d,]*|\d+%|\d+–\d+ minutes|\d+ minutes)/g;
+const METRIC =
+  /(100% on-time payments|Bitcoin and Zcash Mining Pools|Business Continuity Plan \(BCP\)|20% compared to the previous year|Java, Spring Boot, PostgreSQL, and Angular|Apache Kafka|\$\d[\d,]*|\d+%|25–30 minutes to 2–3 minutes|\d+–\d+ minutes|\d+ minutes)/g;
 function emphasize(text: string): ReactNode[] {
   return text.split(METRIC).map((part, i) =>
     i % 2 === 1 ? (
@@ -46,6 +47,7 @@ const CvItem: FC<CvItemProps> = ({ item, type }) => {
   const isList = Array.isArray(item.description) && item.description.length > 1;
   const [showCourses, setShowCourses] = useState(false);
   const [showFocus, setShowFocus] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
   const hasFocus = Boolean((item.tags && item.tags.length > 0) || (item.practices && item.practices.length > 0));
 
   return (
@@ -159,8 +161,45 @@ const CvItem: FC<CvItemProps> = ({ item, type }) => {
 
         {item.responsibilities && (
           <div className="mt-6">
-            <h4 className="text-sm font-medium text-muted-foreground">Current Responsibilities</h4>
+            <h4 className="text-sm font-medium text-muted-foreground">{item.responsibilitiesLabel ?? 'Current Responsibilities'}</h4>
             <p className="mt-3 text-justify leading-relaxed text-foreground/85">{emphasize(item.responsibilities)}</p>
+          </div>
+        )}
+
+        {item.details && (
+          <div className="mt-6">
+            <button
+              type="button"
+              onClick={() => setShowDetails(!showDetails)}
+              aria-expanded={showDetails}
+              aria-controls={`details-${item.id}`}
+              className="inline-flex items-center gap-1.5 rounded-sm text-sm font-medium text-accent underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              More Details
+              <ChevronDown className={cn('h-4 w-4 transition-transform duration-200', showDetails && 'rotate-180')} aria-hidden="true" />
+            </button>
+            {showDetails && (
+              <div id={`details-${item.id}`}>
+                {Array.isArray(item.details) ? (
+                  <ul className="mt-4 space-y-3">
+                    {item.details.map((line, index) => (
+                      <li
+                        key={index}
+                        className="relative pl-5 text-justify leading-relaxed text-foreground/85 before:absolute before:left-0 before:top-[0.75em] before:h-px before:w-2.5 before:bg-accent"
+                      >
+                        {emphasize(line)}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  item.details.split('\n\n').map((paragraph, index) => (
+                    <p key={index} className="mt-4 text-justify leading-relaxed text-foreground/85">
+                      {emphasize(paragraph)}
+                    </p>
+                  ))
+                )}
+              </div>
+            )}
           </div>
         )}
 

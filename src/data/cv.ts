@@ -39,8 +39,10 @@ export interface CvEntry {
   logoAiHint?: string; // Optional: hint for AI image generation if logoUrl is a placeholder
   courses?: CourseDetail[]; // Optional: for education entries
   responsibilities?: string; // Optional: ongoing ownership, shown as one paragraph separate from achievements
+  responsibilitiesLabel?: string; // Optional: heading for the paragraph above. Defaults to "Current Responsibilities".
   domains?: { name: string; detail: string; icons?: SimpleIcon[] }[]; // Optional: areas of work shown as tiles on the left
   highlight?: string; // Optional: a key fact (such as GPA) shown as a tag under the title
+  details?: string | string[]; // Optional: "More Details" dropdown content. A string is paragraphs separated by a blank line; an array is a bullet list.
   typedTitle?: boolean; // Optional: type the title out on scroll, as a feature for the current role
   practices?: string[]; // Optional: methods and concepts, shown separately from tools
 }
@@ -86,9 +88,18 @@ export const experienceData: CvEntry[] = [
     subtitle: 'Foundry Digital LLC',
     period: 'May 2024 - Present',
     description:
-      'I contributed to the launch of the Zcash Mining Pool, focusing on payment workflows and supporting infrastructure, and built a configuration-driven blockchain explorer integration that reduced incidents caused by third-party explorer issues.\n\nI streamlined cryptocurrency payment workflows to achieve 100% on-time payments, cut stored procedure flush times by 50%, and reduced monthly cloud expenses by $20,000 through AWS resource optimization.\n\nI also automated provisioning and deployments for the Bitcoin Mining Pool, and deployed microservices on EKS to handle spikes in processing demand.',
+      'Contributed to the launch of the Zcash Mining Pool, focusing on cryptocurrency payment workflows and supporting infrastructure to ensure reliable payout operations. Improved payment reliability to 100% on-time payments while reducing monthly AWS expenses by $20,000 through resource optimization.',
     responsibilities:
-      'I ensure 100% on-time payments to clients and maintain the payout workflow, making it robust and failure-proof. I develop and maintain infrastructure and dependencies, design new features along that path, identify potential issues early and fix them before they affect payouts, and build and maintain test environments so the team can move quickly with confidence.',
+      'Own and maintain critical cryptocurrency payout workflows across both Bitcoin and Zcash Mining Pools, ensuring reliable and timely client payments. Develop and improve supporting infrastructure, build new payment capabilities, proactively identify and resolve potential production issues, and maintain test environments to enable confident and efficient feature delivery.',
+    details: [
+      'Designed and developed a configuration-driven blockchain explorer integration, decoupling third-party dependencies and reducing incidents caused by external explorer issues.',
+      'Tested and documented the Business Continuity Plan (BCP) for the Bitcoin Mining Pool, automating infrastructure provisioning with Terraform and application deployments through CI/CD pipelines, reducing execution time by 20% compared to the previous year.',
+      'Deployed microservices and supporting dependencies on AWS EKS to handle spikes in processing demand.',
+      'Identified and optimized database bottlenecks, reducing stored procedure flush execution times by 50%.',
+      'Analyzed AWS resource utilization and eliminated redundant resources, reducing monthly cloud expenses by $20,000 while maintaining performance.',
+      'Designed production-like test environments for cryptocurrency payment workflows and developed backend solutions in Spring Boot, including API migrations, cross-application integrations, and failover mechanisms.',
+      'Contributed to platform security improvements and infrastructure reliability.',
+    ],
     location: 'USA',
     domains: [
       { name: 'Crypto Payments', detail: 'Bitcoin and Zcash payment workflows', icons: [siBitcoin, siZcash] },
@@ -103,9 +114,19 @@ export const experienceData: CvEntry[] = [
     title: 'Data Analyst Intern',
     typedTitle: true,
     subtitle: 'Foundry Digital LLC',
-    period: 'Jan 2024 - May 2024 & May 2023 - Dec 2023',
+    period: 'May 2023 - Dec 2023 & Jan 2024 - May 2024',
     description:
-      'I built Python scripts that validate data between database instances in about 20 minutes, replacing manual comparison, and containerized them with Docker to automate dependency installation and environment setup.\n\nI optimized continuous Kafka ingestion into MySQL, reducing processing time from 25–30 minutes to 2–3 minutes, and tuned Spring Boot API endpoints and scheduled jobs to improve processing speed and response times.\n\nI configured Datadog alerts for newly integrated API endpoints so third-party connection errors could be caught and resolved quickly, and set up a baseline for integration tests across micro-services, enabling early issue detection and more reliable production deployments.',
+      'Developed Python-based data validation tools and optimized Kafka-to-MySQL data ingestion, reducing processing time from 25–30 minutes to 2–3 minutes while eliminating manual database comparisons. Improved monitoring and backend performance to enable faster issue detection and more reliable data processing.',
+    responsibilitiesLabel: 'Key Contributions',
+    responsibilities:
+      'Developed automation tools to streamline database validation, improve data ingestion efficiency, and strengthen service monitoring. Optimized backend APIs and scheduled jobs, introduced integration testing practices across microservices, and improved development workflows through containerization.',
+    details: [
+      'Built Python scripts to validate data across database instances, reducing comparison time to approximately 20 minutes and eliminating manual validation. Containerized the scripts with Docker to automate dependency installation and environment setup.',
+      'Optimized continuous Kafka-to-MySQL data ingestion, reducing processing time from 25–30 minutes to 2–3 minutes.',
+      'Configured automated Datadog alerts for newly integrated API endpoints in scheduled jobs, enabling faster detection and resolution of third-party API connectivity issues.',
+      'Optimized Spring Boot API endpoints and scheduled jobs by identifying and resolving bugs, improving processing speed and response times.',
+      'Established a baseline for integration testing across multiple microservices, enabling consistent local testing, early issue detection, and more reliable production deployments.',
+    ],
     location: 'USA',
     domains: [{ name: 'Bitcoin Pool', detail: 'Kafka pipelines, data validation, and API monitoring' }],
     tags: ['Python', 'Docker', 'Datadog', 'MySQL', 'Kafka', 'Spring Boot'],
@@ -118,9 +139,19 @@ export const experienceData: CvEntry[] = [
     title: 'Systems Engineer',
     typedTitle: true,
     subtitle: 'Tata Consultancy Services',
-    period: 'Nov 2020 - July 2022',
+    period: 'Nov 2020 - Jul 2022',
     description:
-      'I engineered the end-to-end cloning flow for Invention Declaration Forms using Spring Boot, Java, PostgreSQL and Angular, improving workflow efficiency and cross-jurisdiction compatibility.\n\nI designed and implemented a database schema optimized for retrieval through advanced SQL joins across multiple tables, and integrated APIs with the user interface for seamless data flow. I built an Angular interface for viewing form details, with role-based access for inventors and authorities.\n\nI also used Kafka to synchronize data in real time between IPRMS and TIPAR modules, eliminating latency issues in the legacy system.',
+      'Engineered an end-to-end Invention Declaration Form cloning workflow using Java, Spring Boot, PostgreSQL, and Angular, improving workflow efficiency and cross-jurisdiction compatibility. Implemented real-time data synchronization between IPRMS and TIPAR modules using Apache Kafka, eliminating latency issues in the legacy system.',
+    responsibilitiesLabel: 'Key Contributions',
+    responsibilities:
+      'Designed and developed full-stack solutions spanning backend services, database architecture, API integrations, and user interfaces. Improved data accessibility and synchronization while streamlining workflows for inventors and authorities.',
+    details: [
+      'Designed and implemented an end-to-end cloning workflow for Invention Declaration Forms, addressing existing system limitations and improving cross-jurisdiction compatibility.',
+      'Developed backend services using Java and Spring Boot, integrating APIs with Angular interfaces to enable seamless data flow.',
+      'Designed and implemented a PostgreSQL database schema, optimizing data retrieval through advanced SQL joins across multiple tables.',
+      'Implemented real-time data synchronization using Apache Kafka between IPRMS and TIPAR modules, eliminating latency issues in the legacy system.',
+      'Developed an Angular interface for viewing Invention Declaration Form details, implementing role-based access for inventors and authorities to improve usability and accessibility.',
+    ],
     location: 'India',
     domains: [{ name: 'Intellectual Property', detail: 'Invention declaration forms and patent workflows' }],
     tags: ['Java', 'Spring Boot', 'PostgreSQL', 'Angular', 'Kafka'],
