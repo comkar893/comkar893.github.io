@@ -1,6 +1,5 @@
 import Header from '@/components/header';
 import HeroAboutSection from '@/components/sections/hero-about-section';
-import ContactSection from '@/components/sections/contact-section';
 import Footer from '@/components/footer';
 import SectionWrapper from '@/components/section-wrapper';
 import CvItem from '@/components/cv-item';
@@ -63,10 +62,10 @@ export default function HomePage() {
         </SectionWrapper>
 
         <SectionWrapper id="skills"title="Skills" className="bg-card">
-          <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {Object.entries(groupedSkills).map(([category, skills]) => (
-              <div key={category}>
-                <h3 className="mb-4 border-b border-border pb-3 text-sm font-medium text-muted-foreground">{category}</h3>
+              <div key={category} className="flex flex-col rounded-lg border border-border bg-background p-5">
+                <h3 className="mb-4 text-sm font-semibold text-foreground">{category}</h3>
                 <ul className="flex flex-wrap gap-2">
                   {skills.map((skill) => (
                     <SkillChip key={skill.id} skill={skill} />
@@ -77,18 +76,10 @@ export default function HomePage() {
           </div>
         </SectionWrapper>
 
-        <SectionWrapper id="projects"title="Projects & Publications">
-          <div className="space-y-16">
-            <div>
-              <h3 className="mb-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">Projects</h3>
-              {projectData.map((item) => (
-                <CvItem key={item.id} item={item} type="project" />
-              ))}
-            </div>
-
+        <SectionWrapper id="projects" title="Publications">
+          <div>
             {publicationData.length > 0 && (
               <div>
-                <h3 className="mb-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">Publications</h3>
                 {publicationData.map((item) => (
                   <CvItem key={item.id} item={item} type="publication" />
                 ))}
@@ -97,7 +88,6 @@ export default function HomePage() {
           </div>
         </SectionWrapper>
 
-        <ContactSection />
       </main>
       <Footer />
     </>

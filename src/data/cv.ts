@@ -19,6 +19,7 @@ import {
   Cable, // For Next.js (representing connections/routing)
   Workflow, // For Agile
 } from 'lucide-react';
+import { siBitcoin, siZcash, type SimpleIcon } from 'simple-icons';
 
 export interface CourseDetail {
   name: string;
@@ -38,6 +39,10 @@ export interface CvEntry {
   logoAiHint?: string; // Optional: hint for AI image generation if logoUrl is a placeholder
   courses?: CourseDetail[]; // Optional: for education entries
   responsibilities?: string; // Optional: ongoing ownership, shown as one paragraph separate from achievements
+  domains?: { name: string; detail: string; icons?: SimpleIcon[] }[]; // Optional: areas of work shown as tiles on the left
+  highlight?: string; // Optional: a key fact (such as GPA) shown as a tag under the title
+  typedTitle?: boolean; // Optional: type the title out on scroll, as a feature for the current role
+  practices?: string[]; // Optional: methods and concepts, shown separately from tools
 }
 
 export interface Skill {
@@ -53,10 +58,9 @@ export const educationData: CvEntry[] = [
     title: 'Master of Science in Data Science',
     subtitle: 'Rochester Institute of Technology',
     period: 'Graduated May 2024',
-    description: 'GPA: 4.0/4.0.',
+    highlight: 'GPA 4.0 / 4.0',
+    description: 'Coursework in data science, software engineering, and cloud systems.',
     location: 'Rochester, NY',
-    logoUrl: 'https://placehold.co/40x40.png',
-    logoAiHint: 'university building',
     courses: [
       { name: 'SWEN601 - Software Construction' },
       { name: 'DSCI633 - Foundations of Data Science & Analytics' },
@@ -69,6 +73,8 @@ export const educationData: CvEntry[] = [
       { name: 'ISTE610 - Non Relational Data Management' },
       { name: 'SWEN614 - Engineering Cloud Software Systems' },
     ],
+    logoUrl: 'https://placehold.co/40x40.png',
+    logoAiHint: 'university building',
   },
 ];
 
@@ -76,55 +82,49 @@ export const experienceData: CvEntry[] = [
   {
     id: 'exp1',
     title: 'Software Engineer III',
+    typedTitle: true,
     subtitle: 'Foundry Digital LLC',
     period: 'May 2024 - Present',
-    description: [
-      'Contributed to the launch of the ZEC Mining Pool, focusing on payment workflows and supporting infrastructure to ensure reliable and stable payout operations.',
-      'Designed and developed a configuration-driven blockchain explorer integration, decoupling explorer dependencies to reduce incidents caused by third-party explorer issues; actively contributed to security improvements across the platform.',
-      'Tested and documented the Business Continuity Plan, automating resource provisioning via Terraform and application deployments via CI/CD pipelines necessary to run Bitcoin Mining Pool, reducing execution time by 20% compared to the previous year.',
-      'Streamlined cryptocurrency payment workflows by optimizing system design and transaction processes, ensuring secure and error-free handling which improved operational efficiency, achieving 100% on-time payments.',
-      'Deployed microservices and their dependencies on EKS, enabling automated handling of spikes in processing demand and cutting AWS resource costs.',
-      'Improved the performance of stored procedures executed periodically by the Spring Boot application after identifying bottlenecks, reducing flush times by 50% and enhancing overall system efficiency.',
-      'Conducted an analysis of AWS resource usage, identifying redundant resources and implementing cost savings optimizations which reduced monthly cloud expenses by $20,000 while maintaining performance.',
-      'Designed test environments for cryptocurrency payments to simulate production workflows and implemented back-end solutions in Spring Boot, including API migrations, cross-application designs, and failover mechanisms, ensuring seamless integration and smooth feature releases.',
-    ],
+    description:
+      'I contributed to the launch of the ZEC Mining Pool, focusing on payment workflows and supporting infrastructure, and built a configuration-driven blockchain explorer integration that reduced incidents caused by third-party explorer issues. I streamlined cryptocurrency payment workflows to achieve 100% on-time payments, cut stored procedure flush times by 50%, and reduced monthly cloud expenses by $20,000 through AWS resource optimization. I also automated provisioning and deployments for the Bitcoin Mining Pool, and deployed microservices on EKS to handle spikes in processing demand.',
     responsibilities:
       'I ensure 100% on-time payments to clients and maintain the payout workflow, making it robust and failure-proof. I develop and maintain infrastructure and dependencies, design new features along that path, identify potential issues early and fix them before they affect payouts, and build and maintain test environments so the team can move quickly with confidence.',
     location: 'USA',
-    tags: ['Kotlin', 'Spring Boot', 'MySQL', 'AWS', 'Terraform', 'EKS', 'Kubernetes', 'Microservices', 'Datadog'],
+    domains: [
+      { name: 'Crypto Payments', detail: 'Bitcoin and ZEC payment workflows', icons: [siBitcoin, siZcash] },
+    ],
+    tags: ['Kotlin', 'Spring Boot', 'MySQL', 'AWS', 'Terraform', 'EKS', 'Kubernetes', 'Datadog'],
+    practices: ['System Design', 'Microservices', 'Observability', 'Agile', 'End-to-End Tests'],
     logoUrl: 'https://placehold.co/40x40.png',
     logoAiHint: 'company office',
   },
   {
     id: 'exp2',
     title: 'Data Analyst Intern',
+    typedTitle: true,
     subtitle: 'Foundry Digital LLC',
     period: 'Jan 2024 - May 2024 & May 2023 - Dec 2023',
-    description: [
-      'Built Python scripts for data comparison between database instances which helped to validate data processed by newly developed services in just 20 minutes, eliminating the need for manual comparison. Containerized with Docker to automate dependency installation and environment setup.',
-      'Configured automated alert triggers in Datadog for newly integrated API endpoints in scheduled jobs, enabling timely alerts to identify and debug issues with third-party APIs, facilitating swift troubleshooting actions on critical connection errors and ensuring quicker resolution.',
-      'Enhanced data ingestion efficiency in the MySQL database by optimizing continuous data consumption from Kafka, reducing processing time from 25-30 minutes to just 2-3 minutes.',
-      'Optimized Spring Boot API endpoints and scheduled jobs by addressing bugs, improving data processing speed and system performance, resulting in faster response times and better data accessibility.',
-      'Established a baseline for integration tests across multiple micro-services, standardizing and enabling efficient local testing for early issue detection and instilling team confidence for seamless, reliable production deployments.',
-    ],
+    description:
+      'I built Python scripts that validate data between database instances in about 20 minutes, replacing manual comparison, and containerized them with Docker to automate dependency installation and environment setup. I optimized continuous Kafka ingestion into MySQL, reducing processing time from 25–30 minutes to 2–3 minutes, and tuned Spring Boot API endpoints and scheduled jobs to improve processing speed and response times. I configured Datadog alerts for newly integrated API endpoints so third-party connection errors could be caught and resolved quickly, and set up a baseline for integration tests across micro-services, enabling early issue detection and more reliable production deployments.',
     location: 'USA',
-    tags: ['Python', 'Docker', 'Datadog', 'MySQL', 'Kafka', 'Spring Boot', 'Data Analysis'],
+    domains: [{ name: 'Bitcoin Pool', detail: 'Kafka pipelines, data validation, and API monitoring' }],
+    tags: ['Python', 'Docker', 'Datadog', 'MySQL', 'Kafka', 'Spring Boot'],
+    practices: ['Data Analysis', 'Integration Testing', 'Monitoring'],
     logoUrl: 'https://placehold.co/40x40.png',
     logoAiHint: 'company office',
   },
   {
     id: 'exp3',
     title: 'Systems Engineer',
+    typedTitle: true,
     subtitle: 'Tata Consultancy Services',
     period: 'Nov 2020 - July 2022',
-    description: [
-      'Engineered the end-to-end cloning flow for Invention Declaration Forms using Spring Boot, Java, PostgreSQL and Angular, significantly improving workflow efficiency and addressing prior system limitations, resulting in enhanced usability and cross-jurisdiction compatibility.',
-      'Designed and implemented a comprehensive database schema, optimizing data retrieval through advanced SQL joins across multiple tables and successfully integrated APIs with the user interface, ensuring seamless data flow and performance.',
-      'Leveraged Kafka to synchronize data in real-time between IPRMS and TIPAR modules, eliminating latency issues in the legacy system and ensuring timely and accurate data synchronization.',
-      'Developed a user-friendly interface with Angular for viewing Invention Declaration Form details, streamlining role based access for both inventors and authorities, enhancing user experience and accessibility by enabling a more intuitive and responsive interface.',
-    ],
+    description:
+      'I engineered the end-to-end cloning flow for Invention Declaration Forms using Spring Boot, Java, PostgreSQL and Angular, improving workflow efficiency and cross-jurisdiction compatibility. I designed and implemented a database schema optimized for retrieval through advanced SQL joins across multiple tables, and integrated APIs with the user interface for seamless data flow. I built an Angular interface for viewing form details, with role-based access for inventors and authorities. I also used Kafka to synchronize data in real time between IPRMS and TIPAR modules, eliminating latency issues in the legacy system.',
     location: 'India',
-    tags: ['Java', 'Spring Boot', 'PostgreSQL', 'Angular', 'Kafka', 'System Design'],
+    domains: [{ name: 'Intellectual Property', detail: 'Invention declaration forms and patent workflows' }],
+    tags: ['Java', 'Spring Boot', 'PostgreSQL', 'Angular', 'Kafka'],
+    practices: ['System Design', 'Microservices'],
     logoUrl: 'https://placehold.co/40x40.png',
     logoAiHint: 'tech company',
   },
